@@ -1,0 +1,9 @@
+{
+    "collisionBounds": {
+        "CollisionBoundsColorGammaA": 0,
+        "CollisionBoundsColorGammaR": 255
+    },
+    "steamvr": {
+        "mirrorViewGeometry": "0 0 1080 600"
+    }
+}
