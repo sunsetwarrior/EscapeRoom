@@ -204,6 +204,7 @@
      <Compile Include="Assets\Scripts\drawerWithLock.cs" />
      <Compile Include="Assets\Scripts\lightOpen.cs" />
      <Compile Include="Assets\Scripts\NetWorkManager.cs" />
+     <Compile Include="Assets\Scripts\NetworkObjects.cs" />
      <Compile Include="Assets\Scripts\objectActive.cs" />
      <Compile Include="Assets\Scripts\ViveManager.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
@@ -689,10 +690,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>C:/Users/admin/Desktop/ICT Project/EscapeRoom/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>C:/Users/admin/Documents/GitHub/EscapeRoom/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="websocket-sharp">
- <HintPath>C:/Users/admin/Desktop/ICT Project/EscapeRoom/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+ <HintPath>C:/Users/admin/Documents/GitHub/EscapeRoom/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
