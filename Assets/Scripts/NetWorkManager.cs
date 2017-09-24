@@ -8,6 +8,8 @@ public class NetWorkManager : MonoBehaviour {
 	public GameObject LhandPrefab;
 	public GameObject RhandPrefab;
 
+    //scene object
+    public GameObject CD;
 
 	public void Start()
 	{
@@ -51,5 +53,9 @@ public class NetWorkManager : MonoBehaviour {
 		PhotonNetwork.Instantiate(headPrefab.name, ViveManager.Instance.head.transform.position, ViveManager.Instance.head.transform.rotation, 0);
 		PhotonNetwork.Instantiate(LhandPrefab.name, ViveManager.Instance.rightHand.transform.position, ViveManager.Instance.rightHand.transform.rotation, 0);
 		PhotonNetwork.Instantiate(RhandPrefab.name, ViveManager.Instance.leftHand.transform.position, ViveManager.Instance.leftHand.transform.rotation, 0);
+
+        //instantiate scene objects
+
+        PhotonNetwork.InstantiateSceneObject(CD.name, CD.transform.position, CD.transform.rotation, 0, null);
 	}
 }

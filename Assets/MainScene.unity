@@ -878,7 +878,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 57709624}
   m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0.1243, y: 0.00948, z: -0.01998}
+  m_LocalPosition: {x: 0.12563, y: 0.00948, z: -0.01998}
   m_LocalScale: {x: 0.00291879, y: 0.0010680411, z: 0.00532944}
   m_Children:
   - {fileID: 451269826}
@@ -1081,8 +1081,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 57709632}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 11
-  instantiationId: 11
+  viewIdField: 17
+  instantiationId: 17
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!1 &58768449
@@ -16554,12 +16554,12 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 119
+      value: 314
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
@@ -16569,7 +16569,7 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3, type: 2}
@@ -21448,6 +21448,7 @@ MonoBehaviour:
     type: 2}
   RhandPrefab: {fileID: 1531851336080742, guid: 9f81ee51694bbc343ace14939214ca5f,
     type: 2}
+  CD: {fileID: 1208959757895686, guid: 6b091f7a0ce3d6447a1c68d3f9c80cd7, type: 2}
 --- !u!114 &1854420530
 MonoBehaviour:
   m_ObjectHideFlags: 0
