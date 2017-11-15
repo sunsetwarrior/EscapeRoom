@@ -8,6 +8,7 @@
         public TextMesh go;
 		public GameObject lift;
 		private Animator animator;
+        public AudioClip slideDoor;
         private VRTK_Control_UnityEvents controlEvents;
         private void Start()
         {
@@ -24,9 +25,11 @@
         private void HandleChange(object sender, Control3DEventArgs e)
         {
             go.text = e.value.ToString() + "(" + e.normalizedValue.ToString() + "%)";
-			if(e.value > 0){
+			if(e.value > 50){
 				animator.SetBool ("open", true);
-			}
+                AudioSource.PlayClipAtPoint(slideDoor, GameObject.Find("Front").transform.position);
+                Destroy(this.GetComponent<ControlReactor>());
+            }
         }
     }
 }

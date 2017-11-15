@@ -2,60 +2,84 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetWorkManager : MonoBehaviour {
+public class NetWorkManager : MonoBehaviour
+{
 
-	public GameObject headPrefab;
-	public GameObject LhandPrefab;
-	public GameObject RhandPrefab;
+    public GameObject headPrefab;
+    public GameObject LhandPrefab;
+    public GameObject RhandPrefab;
 
     //scene object
-    public GameObject CD;
+    //public GameObject bin;
+    //public GameObject door;
+    //public GameObject chest;
+    //public GameObject drawer;
 
-	public void Start()
-	{
-		PhotonNetwork.ConnectUsingSettings("1.0");
-	}
+    public static NetWorkManager Instance;
+
+    /// <summary>Connect automatically? If false you can set this to true later on or call ConnectUsingSettings in your own scripts.</summary>
+    public bool AutoConnect = true;
+
+    public byte Version = 1;
+
+    /// <summary>if we don't want to connect in Start(), we have to "remember" if we called ConnectUsingSettings()</summary>
+    private bool ConnectInUpdate = true;
+
+    public void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings("1.0");
+    }
+
+    public virtual void Update()
+    {
+        if (ConnectInUpdate && AutoConnect && !PhotonNetwork.connected)
+        {
+            Debug.Log("Update() was called by Unity. Scene is loaded. Let's connect to the Photon Master Server. Calling: PhotonNetwork.ConnectUsingSettings();");
+
+            ConnectInUpdate = false;
+            PhotonNetwork.ConnectUsingSettings(Version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+        }
+    }
+
+    // below, we implement some callbacks of PUN
+    // you can find PUN's callbacks in the class PunBehaviour or in enum PhotonNetworkingMessage
 
 
+    public virtual void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room. Calling: PhotonNetwork.JoinRandomRoom();");
+        PhotonNetwork.JoinRandomRoom();
+    }
 
-	// below, we implement some callbacks of PUN
-	// you can find PUN's callbacks in the class PunBehaviour or in enum PhotonNetworkingMessage
+    public virtual void OnJoinedLobby()
+    {
+        Debug.Log("OnJoinedLobby(). This client is connected and does get a room-list, which gets stored as PhotonNetwork.GetRoomList(). This script now calls: PhotonNetwork.JoinRandomRoom();");
+        PhotonNetwork.JoinRandomRoom();
+    }
 
+    public virtual void OnPhotonRandomJoinFailed()
+    {
+        Debug.Log("OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
+        PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 4 }, null);
+    }
 
-	public virtual void OnConnectedToMaster()
-	{
-		Debug.Log("OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room. Calling: PhotonNetwork.JoinRandomRoom();");
-		PhotonNetwork.JoinRandomRoom();
-	}
+    // the following methods are implemented to give you some context. re-implement them as needed.
 
-	public virtual void OnJoinedLobby()
-	{
-		Debug.Log("OnJoinedLobby(). This client is connected and does get a room-list, which gets stored as PhotonNetwork.GetRoomList(). This script now calls: PhotonNetwork.JoinRandomRoom();");
-		PhotonNetwork.JoinRandomRoom();
-	}
+    public virtual void OnFailedToConnectToPhoton(DisconnectCause cause)
+    {
+        Debug.LogError("Cause: " + cause);
+    }
 
-	public virtual void OnPhotonRandomJoinFailed()
-	{
-		Debug.Log("OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
-		PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 4 }, null);
-	}
+    public void OnJoinedRoom()
+    {
+        Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
+        PhotonNetwork.Instantiate(headPrefab.name, ViveManager.Instance.head.transform.position, ViveManager.Instance.head.transform.rotation, 0);
+        PhotonNetwork.Instantiate(LhandPrefab.name, ViveManager.Instance.rightHand.transform.position, ViveManager.Instance.rightHand.transform.rotation, 0);
+        PhotonNetwork.Instantiate(RhandPrefab.name, ViveManager.Instance.leftHand.transform.position, ViveManager.Instance.leftHand.transform.rotation, 0);
 
-	// the following methods are implemented to give you some context. re-implement them as needed.
-
-	public virtual void OnFailedToConnectToPhoton(DisconnectCause cause)
-	{
-		Debug.LogError("Cause: " + cause);
-	}
-
-	public void OnJoinedRoom()
-	{
-		Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
-		PhotonNetwork.Instantiate(headPrefab.name, ViveManager.Instance.head.transform.position, ViveManager.Instance.head.transform.rotation, 0);
-		PhotonNetwork.Instantiate(LhandPrefab.name, ViveManager.Instance.rightHand.transform.position, ViveManager.Instance.rightHand.transform.rotation, 0);
-		PhotonNetwork.Instantiate(RhandPrefab.name, ViveManager.Instance.leftHand.transform.position, ViveManager.Instance.leftHand.transform.rotation, 0);
-
-        //instantiate scene objects
-
-        PhotonNetwork.InstantiateSceneObject(CD.name, CD.transform.position, CD.transform.rotation, 0, null);
-	}
+        //PhotonNetwork.InstantiateSceneObject(bin.name, bin.transform.position, bin.transform.rotation, 0, null);
+        //PhotonNetwork.InstantiateSceneObject(door.name, door.transform.position, door.transform.rotation, 0, null);
+        //PhotonNetwork.InstantiateSceneObject(chest.name, chest.transform.position, chest.transform.rotation, 0, null);
+        //PhotonNetwork.InstantiateSceneObject(drawer.name, drawer.transform.position, drawer.transform.rotation, 0, null);
+    }
 }

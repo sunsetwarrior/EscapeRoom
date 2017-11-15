@@ -10,8 +10,10 @@ public class InstantiateCube : MonoBehaviour
 
     public bool showGui;
 
+
     void OnClick()
     {
+
         if (PhotonNetwork.connectionStateDetailed != ClientState.Joined)
         {
             // only use PhotonNetwork.Instantiate while in a room.
