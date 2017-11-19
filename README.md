@@ -14,3 +14,5 @@ Implemented event triggers to open door.
 Author: Zhang Fan, Darren Wong Zhi Ren
 Supervisor: Prof. Mark Billinghurst, Dr. Arindam Dey, Hao Chen
 Organisation: University of South Australia
+
+EscapeRoom.mp4 is the demo video 
