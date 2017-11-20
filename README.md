@@ -15,10 +15,10 @@ Author: Zhang Fan, Darren Wong Zhi Ren
 Supervisor: Prof. Mark Billinghurst, Dr. Arindam Dey, Hao Chen
 Organisation: University of South Australia
 
-Program used:
-Unity
-Photon network package
-HTC vive package
+Program used: 
+Unity       
+Photon network package  
+HTC vive package  
 VRTK package
 
 EscapeRoom.mp4 is the demo video 
